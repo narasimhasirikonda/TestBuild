@@ -54,7 +54,7 @@ node {
             echo "Setting the Audience URL to ${SF_INSTANCE_URL} ..."
             sh "export SFDX_AUDIENCE_URL=${SF_INSTANCE_URL}"
             echo 'Authenticating to SFDX..'
-            sh "${toolbelt} auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias MyOrg"
+            sh "${toolbelt}/sfdx auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias MyOrg"
             echo "Code Coverage"
             sh "${toolbelt} force:apex:test:run -s "mySuite" -c -u MyOrg"
         }
