@@ -61,9 +61,9 @@ node {
             }
              echo "Code Coverage"
             if (isUnix()) {
-             rmsg = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run -s mySuite -c -u MyOrg"
+             rmsg = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run -s mySuite -c -u MyOrg --resultformat tap --codecoverage"
             } else{
-             rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:apex:test:run -s mySuite -c -u MyOrg"
+             rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:apex:test:run -s mySuite -c -u MyOrg --resultformat tap --codecoverage"
             }
             printf rmsg
         }
