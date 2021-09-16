@@ -55,13 +55,13 @@ node {
             sh "export SFDX_AUDIENCE_URL=${SF_INSTANCE_URL}"
             echo 'Authenticating to SFDX..'
             if (isUnix()) {
-             rc = sh returnStatus: true, script: "${toolbelt} force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias MyOrg"
+             rc = sh returnStatus: true, script: "${toolbelt}/sfdx force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias MyOrg"
             } else {
              rc = bat returnStatus: true, script: "\"${toolbelt}\" force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias MyOrg"
             }
              echo "Code Coverage"
             if (isUnix()) {
-             rmsg = sh returnStdout: true, script: "${toolbelt} force:apex:test:run -s "mySuite" -c -u MyOrg"
+             rmsg = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run -s "mySuite" -c -u MyOrg"
             } else{
              rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:apex:test:run -s "mySuite" -c -u MyOrg"
             }
