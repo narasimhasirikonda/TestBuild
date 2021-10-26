@@ -50,6 +50,10 @@ node {
     // -------------------------------------------------------------------------
     stage('Test Coverage') {
         echo "Using the ${SERVER_KEY_CREDENTIALS_ID} credentials.."
+         WithCredentials([string(credentialsId: 'jenkinsslack', variable: 'slackCredentials')]) {
+              slackSend (channel: '@empwr-sf-testcoverage', message: 'test', color: green, failOnError: true, teamDomain: 'bah-ssp', token: slackCredentials)
+         }
+      /*
         withCredentials([file(credentialsId: SERVER_KEY_CREDENTIALS_ID, variable: 'server_key_file')]) {
             echo "Setting the Audience URL to ${SF_INSTANCE_URL} ..."
             sh "export SFDX_AUDIENCE_URL=${SF_INSTANCE_URL}"
@@ -68,9 +72,8 @@ node {
             }
             //printf rmsg
         }
-        WithCredentials([string(credentialsId: 'jenkinsslack', variable: 'slackCredentials')]) {
-              slackSend (channel: '@empwr-sf-testcoverage', message: 'test', color: green, failOnError: true, teamDomain: 'bah-ssp', token: slackCredentials)
-             }
+        */
+       
     }
   
 }
