@@ -61,7 +61,7 @@ node {
             }
              echo "Code Coverage"
             if (isUnix()) {
-             rmsg = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run -s mySuite -c -u MyOrg -r human > /Users/Shas/Desktop/emPWR-GIT/testresults/testlog.txt"
+             //rmsg = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run -s mySuite -c -u MyOrg -r human > /Users/Shas/Desktop/emPWR-GIT/testresults/testlog.txt"
              WithCredentials([string(credentialsId: 'jenkinsslack', variable: 'slackCredentials')]) {
               slackSend (channel: '@empwr-sf-testcoverage', message: 'test', color: green, failOnError: true, teamDomain: 'bah-ssp', token: slackCredentials)
              }
