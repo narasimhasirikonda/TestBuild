@@ -50,7 +50,7 @@ node {
     // -------------------------------------------------------------------------
     stage('Test Coverage') {
         echo "Using the ${SERVER_KEY_CREDENTIALS_ID} credentials.."
-         WithCredentials([string(credentialsId: 'jenkinsslack', variable: 'slackCredentials')]) {
+         withCredentials([string(credentialsId: 'jenkinsslack', variable: 'slackCredentials')]) {
               slackSend (channel: '@empwr-sf-testcoverage', message: 'test', color: green, failOnError: true, teamDomain: 'bah-ssp', token: slackCredentials)
          }
       /*
