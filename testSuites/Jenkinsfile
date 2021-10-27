@@ -70,7 +70,7 @@ node {
              rmsg = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run -s mySuite -c -u MyOrg -r human > testlog.txt"
              sleep 180
              slackSend (channel: '#empwr-sf-codecoverage', message: 'test', color: green, failOnError: true, teamDomain: 'bah-ssp',tokenCredentialId: 'jenkinsslack1')
-             slackUploadFile(channel: '#empwr-sf-codecoverage',teamDomain: 'bah-ssp',tokenCredentialId: 'jenkinsslack1', filePath: "testlog.txt")
+             slackUploadFile(channel: '#empwr-sf-codecoverage',credentialId: 'jenkinsslack1', filePath: "testlog.txt")
             } else{
              //rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:apex:test:run -s mySuite -c -u MyOrg -r human > testlog.txt"
             }
