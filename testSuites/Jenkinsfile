@@ -51,7 +51,7 @@ node {
     stage('Test Coverage') {
         echo "Using the ${SERVER_KEY_CREDENTIALS_ID} credentials.."
          withCredentials([string(credentialsId: 'jenkinsslack1', variable: 'slackCredentials')]) {
-              slackSend (baseurl:'https://bah-ssp.slack.com/' channel: '@empwr-sf-codecoverage', message: 'test', color: green, failOnError: true, teamDomain: 'bah-ssp',tokenCredentialId: 'jenkinsslack1')
+              slackSend (channel: '@empwr-sf-codecoverage', message: 'test', color: green, failOnError: true, teamDomain: 'bah-ssp',tokenCredentialId: 'jenkinsslack1')
          }
       /*
         withCredentials([file(credentialsId: SERVER_KEY_CREDENTIALS_ID, variable: 'server_key_file')]) {
