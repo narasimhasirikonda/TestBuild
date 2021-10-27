@@ -50,10 +50,12 @@ node {
     // -------------------------------------------------------------------------
     stage('Test Coverage') {
         echo "Using the ${SERVER_KEY_CREDENTIALS_ID} credentials.."
+      /*
          withCredentials([string(credentialsId: 'jenkinsslack1', variable: 'slackCredentials')]) {
               slackSend (channel: '#empwr-sf-codecoverage', message: 'test', color: green, failOnError: true, teamDomain: 'bah-ssp',tokenCredentialId: 'jenkinsslack1')
          }
-      /*
+     */
+      
         withCredentials([file(credentialsId: SERVER_KEY_CREDENTIALS_ID, variable: 'server_key_file')]) {
             echo "Setting the Audience URL to ${SF_INSTANCE_URL} ..."
             sh "export SFDX_AUDIENCE_URL=${SF_INSTANCE_URL}"
@@ -65,14 +67,16 @@ node {
             }
              echo "Code Coverage"
             if (isUnix()) {
-             //rmsg = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run -s mySuite -c -u MyOrg -r human > /Users/Shas/Desktop/emPWR-GIT/testresults/testlog.txt"
-             
+             rmsg = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run -s mySuite -c -u MyOrg -r human > testlog.txt"
+             sleep 180
+             slackSend (channel: '#empwr-sf-codecoverage', message: 'test', color: green, failOnError: true, teamDomain: 'bah-ssp',tokenCredentialId: 'jenkinsslack1')
+             slackUploadFile filePath: "testlog.txt"
             } else{
-             //rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:apex:test:run -s mySuite -c -u MyOrg -r human > testresults/testlog.txt"
+             //rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:apex:test:run -s mySuite -c -u MyOrg -r human > testlog.txt"
             }
-            //printf rmsg
+            printf rmsg
         }
-        */
+        
        
     }
   
