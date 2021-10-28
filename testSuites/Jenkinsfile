@@ -70,6 +70,7 @@ node {
              rmsg = sh returnStdout: true, script: "${toolbelt}/sfdx force:apex:test:run -s mySuite -c -u MyOrg -v -r json > testlog.json"
              sleep 120
              def attachments = readJSON file: 'testlog.json'
+             print attachments
              slackSend (channel: '#empwr-sf-codecoverage', message: 'test', color: green, failOnError: true, teamDomain: 'bah-ssp',tokenCredentialId: 'jenkinsslack1',attachments: attachments)
             } else{
              //rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:apex:test:run -s mySuite -c -u MyOrg -v -r json > testlog.json"
