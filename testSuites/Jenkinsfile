@@ -71,18 +71,19 @@ node {
              sleep 120
              def attachments = readJSON file: 'testlog.json'
              print attachments
+             print ${env.JOB_NAME}
              print 'Result:' + attachments.result
              print 'test Run Id:' + attachments.result.summary.testRunId
              print 'test Ran' + attachments.result.summary.testsRan
              print 'test failing' + attachments.result.summary.failing
              print 'test Coverage' + attachments.result.coverage.summary.testRunCoverage
-             msg = 'SQA 80 test coverage finished successfully\n' + 'URL:https://va--empwrsqa70.lightning.force.com/lightning/setup/ApexTestHistory/home\n' +
-             'TestRun Id :' + attachments.result.summary.testRunId + '\n' + 'Test Ran:' + attachments.result.summary.testsRan + '\n' +
-             'Test Failing:' + attachments.result.summary.failing + '\n' + 'Tes Coverage:' + attachments.result.coverage.summary.testRunCoverage + '\n'
+             msg = 'SQA 80 test coverage finished successfully\n' + 'URL: https://va--empwrsqa70.lightning.force.com/lightning/setup/ApexTestHistory/home\n' +
+             'TestRun Id :' + attachments.result.summary.testRunId + '\n' + 'Test Ran: ' + attachments.result.summary.testsRan + '\n' +
+             'Test Failin: ' + attachments.result.summary.failing + '\n' + 'Tes Coverage: ' + attachments.result.coverage.summary.testRunCoverage + '\n'
              if(attachments.result.summary.failing > 0){
-              msgcolor = 'red'
+              msgcolor = '#FF0000'
              } else{
-              msgcolor = 'green'
+              msgcolor = '#00FF00'
              }
              slackSend (channel: '#empwr-sf-codecoverage', message: msg, color: msgcolor, failOnError: true, teamDomain: 'bah-ssp',tokenCredentialId: 'jenkinsslack1')
             } else{
