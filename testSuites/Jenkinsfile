@@ -71,7 +71,7 @@ node {
              sleep 120
              def attachments = readJSON file: 'testlog.json'
              print attachments
-             print ${env.JOB_NAME}
+             print env.JOB_NAME
              print 'Result:' + attachments.result
              print 'test Run Id:' + attachments.result.summary.testRunId
              print 'test Ran' + attachments.result.summary.testsRan
