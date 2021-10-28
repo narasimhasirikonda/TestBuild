@@ -84,7 +84,7 @@ node {
              } else{
               msgcolor = 'green'
              }
-             slackSend (channel: '#empwr-sf-codecoverage', message: msg, color: msgcolor, failOnError: true, teamDomain: 'bah-ssp',tokenCredentialId: 'jenkinsslack1',attachments: attachments)
+             slackSend (channel: '#empwr-sf-codecoverage', message: msg, color: msgcolor, failOnError: true, teamDomain: 'bah-ssp',tokenCredentialId: 'jenkinsslack1')
             } else{
              //rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:apex:test:run -s mySuite -c -u MyOrg -v -r json > testlog.json"
             }
