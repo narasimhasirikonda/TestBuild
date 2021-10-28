@@ -71,6 +71,10 @@ node {
              sleep 120
              def attachments = readJSON file: 'testlog.json'
              print attachments
+             print 'test Run Id:' + attachments.result.testRunId
+             print 'test Ran' + attachments.result.testsRan
+             print 'test failing' + attachments.result.failing
+             print 'test Coverage' + attachments.coverage.summary.testRunCoverage
              slackSend (channel: '#empwr-sf-codecoverage', message: 'test', color: green, failOnError: true, teamDomain: 'bah-ssp',tokenCredentialId: 'jenkinsslack1',attachments: attachments)
             } else{
              //rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:apex:test:run -s mySuite -c -u MyOrg -v -r json > testlog.json"
